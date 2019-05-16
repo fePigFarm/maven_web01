@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class PersonInfo {
     // 用户id
-    private long userId;
+    private Long userId;
     // 用户姓名
     private String name;
     // 用户头像
