@@ -7,7 +7,8 @@
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- 配置整合mybatis过程 -->
+    <!-- 配置整合mybatis过程 classpath就指代着src/main/resources这个目录 -->
+
     <!-- 配置数据库的相关参数properties属性 找到文件位置 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
@@ -36,9 +37,9 @@
         <property name="dataSource" ref="dataSource" />
         <!-- 配置MyBaties全局配置文件:mybatis-config.xml -->
         <property name="configLocation" value="classpath:mybatis-config.xml" />
-        <!-- 扫描entity包 使用别名 -->
+        <!-- 扫描entity包 和数据库对应起来 使用别名 -->
         <property name="typeAliasesPackage" value="com.faith.myo2o.entity" />
-        <!-- 扫描sql配置文件:mapper需要的xml文件 -->
+        <!-- 扫描sql配置文件:mapper需要的xml文件 跟实体类一一对应的mapper文件 -->
         <property name="mapperLocations" value="classpath:mapper/*.xml" />
     </bean>
 
