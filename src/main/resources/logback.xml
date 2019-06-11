@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--logback自动每隔60s检测配置，并且热更新-->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!--定义参数常量-->
+    <!--日志级别：TRACE < DEBUG < INFO < WARN < ERROR 小于等于其级别的不输出-->
+    <!--实例：logger.trace("msg") logger.info("info")-->
+    <property name="log.level" value="debug" />
+    <property name="log.maxHistory" value="30"/>
+    <!--表示日志存储的根路径-->
+    <property name="log.filePath" value="${catalina.base}/webapps"/>
+    <!--日志格式  %d时间格式 [%thread]线程  %-5level %logger{55} - %msg%n-->
+    <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{55} -
+				%msg%n" />
+    <appender name="" class=""></appender>
+</configuration>
