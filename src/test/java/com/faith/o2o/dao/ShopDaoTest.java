@@ -6,6 +6,7 @@ import com.faith.o2o.entity.PersonInfo;
 import com.faith.o2o.entity.Shop;
 import com.faith.o2o.entity.ShopCategory;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,6 +25,7 @@ public class ShopDaoTest extends BaseTest {
     private ShopDao shopDao;
 
     @Test
+    @Ignore
     public void testInsertShop() {
         Shop shop = new Shop();
         Area area = new Area();
@@ -48,6 +50,18 @@ public class ShopDaoTest extends BaseTest {
         shop.setAdvice("审核中");
 
         int effectedNum = shopDao.insertShop(shop);
+        Assert.assertEquals(1, effectedNum);
+    }
+
+    @Test
+    public void testUpdateShop() {
+        Shop shop = new Shop();
+        shop.setShopId(1L);
+
+        shop.setShopName("测试的修改店铺");
+        shop.setShopDesc("测试修改描述");
+        shop.setLastEditTime(new Date());
+        int effectedNum = shopDao.updateShop(shop);
         Assert.assertEquals(1, effectedNum);
     }
 }
