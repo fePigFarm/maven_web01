@@ -52,7 +52,7 @@
         <file>${log.filePath}/info.log</file>
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!--文件名称-->
+            <!--文件名称 打包前一天的文件为gz-->
             <fileNamePattern>
                 ${log.filePath}/info/info.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
