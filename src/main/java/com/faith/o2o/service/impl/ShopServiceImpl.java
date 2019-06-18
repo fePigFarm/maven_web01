@@ -2,6 +2,7 @@ package com.faith.o2o.service.impl;
 
 import com.faith.o2o.dto.ShopExecution;
 import com.faith.o2o.entity.Shop;
+import com.faith.o2o.enums.ShopStateEnum;
 import com.faith.o2o.service.ShopService;
 
 import java.io.File;
@@ -15,6 +16,9 @@ import java.io.File;
 public class ShopServiceImpl implements ShopService {
 
     public ShopExecution addShop(Shop shop, File shopImg) {
+        if(shop == null) {
+            return new ShopExecution(ShopStateEnum.NULL_SHOP);
+        }
         return null;
     }
 }

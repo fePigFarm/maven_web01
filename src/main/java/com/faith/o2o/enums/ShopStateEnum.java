@@ -14,7 +14,7 @@ public enum ShopStateEnum {
     PASS(2, "通过认证"),
     INNER_ERROR(-1001, "操作失败"),
     NULL_SHOPID(-1002, "ShopId为空"),
-    NULL_SHOP_INFO(-1003, "传入了空的信息");
+    NULL_SHOP(-1003, "shop信息为空");
 
     // 私用状态
     private int state;
