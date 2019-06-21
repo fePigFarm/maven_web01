@@ -13,5 +13,5 @@ import java.io.File;
  * @version: 1.0
  */
 public interface ShopService {
-    ShopExecution addShop(Shop shop, CommonsMultipartFile shopImg);
+    ShopExecution addShop(Shop shop, File shopImg);
 }
