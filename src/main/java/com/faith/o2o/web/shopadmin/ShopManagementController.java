@@ -104,6 +104,8 @@ public class ShopManagementController {
             owner.setUserId(1L);
             shop.setOwner(owner);
 
+            /*
+
             // 随机创建一个文件 然后删除
             File shopImgFile = new File(PathUtil.getImgBasePath() + ImageUtil.getRandomFileName());
             try {
@@ -120,14 +122,21 @@ public class ShopManagementController {
                 modelMap.put("errMsg", e.getMessage());
                 return modelMap;
             }
-
             // 上面主要是把CommonsMultipartFile 转为 File文件
-            ShopExecution se = shopService.addShop(shop, shopImgFile);
-            if (se.getState() == ShopStateEnum.CHECK.getState()) {
-                modelMap.put("sucess", true);
-            } else {
+
+            */
+            ShopExecution se;
+            try {
+                se = shopService.addShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
+                if (se.getState() == ShopStateEnum.CHECK.getState()) {
+                    modelMap.put("sucess", true);
+                } else {
+                    modelMap.put("sucess", false);
+                    modelMap.put("errMsg", se.getStateInfo());
+                }
+            } catch (IOException e) {
                 modelMap.put("sucess", false);
-                modelMap.put("errMsg", se.getStateInfo());
+                modelMap.put("errMsg", e.getMessage());
             }
             return modelMap;
         } else {
@@ -138,6 +147,8 @@ public class ShopManagementController {
         // 3、返回结果 已经在各个结果中了，此处略
 
     }
+
+    /*
     private static void inputStreamToFile(InputStream ins, File file) {
         FileOutputStream os = null;
         try {
@@ -162,5 +173,5 @@ public class ShopManagementController {
                 throw new RuntimeException("inputStreamToFile关闭异常，原因：" + e.getMessage());
             }
         }
-    }
+    } */
 }
