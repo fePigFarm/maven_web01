@@ -149,6 +149,7 @@ public class ShopManagementController {
     }
 
     /*
+    
     private static void inputStreamToFile(InputStream ins, File file) {
         FileOutputStream os = null;
         try {
