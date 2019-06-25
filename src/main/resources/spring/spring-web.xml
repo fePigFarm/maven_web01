@@ -35,7 +35,10 @@
 
     <!--文件上传解析器-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-
+        <property name="defaultEncoding" value="utf-8"></property>
+        <!--20M兑换字节-->
+        <property name="maxUploadSize" value="20971520"></property>
+        <property name="maxInMemorySize" value="20971520"></property>
     </bean>
 
     <!-- 4.扫描web相关的bean -->
