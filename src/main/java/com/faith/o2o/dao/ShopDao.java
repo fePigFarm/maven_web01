@@ -10,6 +10,13 @@ import com.faith.o2o.entity.Shop;
  */
 public interface ShopDao {
     /**
+     * 根据id获取店铺信息
+     * @param shopId
+     * @return
+     */
+    Shop queryByShopId(long shopId);
+
+    /**
      * 新增店铺
      * @param shop
      * @return 1或者-1
