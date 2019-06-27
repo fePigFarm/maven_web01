@@ -66,6 +66,32 @@ public class ShopServiceImpl implements ShopService {
         return new ShopExecution(ShopStateEnum.CHECK, shop);
     }
 
+    /**
+     * 实现获取接口
+     * @param shopId
+     * @return
+     */
+    @Override
+    public Shop getByShopId(long shopId) {
+        return shopDao.queryByShopId(shopId);
+    }
+
+
+    /**
+     * 实现修改接口
+     * @param shop
+     * @param shopImgInputStream
+     * @param fileName
+     * @return
+     * @throws ShopOperationException
+     */
+    @Override
+    public ShopExecution modifyShop(Shop shop, InputStream shopImgInputStream, String fileName) throws ShopOperationException {
+        // 1、判断是否要处理图片
+        // 2、更新店铺信息
+        return null;
+    }
+
     // 给shop添加图片的方法
     private void addShopImg(Shop shop, InputStream shopImgInputStream, String fileName) {
         // 获取shop图片目录的相对值路径
@@ -74,4 +100,6 @@ public class ShopServiceImpl implements ShopService {
         // 设置图片
         shop.setShopImg(shopImgAddr);
     }
+
+
 }
