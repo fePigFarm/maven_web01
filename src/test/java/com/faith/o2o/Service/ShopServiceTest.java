@@ -7,8 +7,10 @@ import com.faith.o2o.entity.PersonInfo;
 import com.faith.o2o.entity.Shop;
 import com.faith.o2o.entity.ShopCategory;
 import com.faith.o2o.enums.ShopStateEnum;
+import com.faith.o2o.exceptions.ShopOperationException;
 import com.faith.o2o.service.ShopService;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,7 +31,8 @@ public class ShopServiceTest extends BaseTest {
     private ShopService shopService;
 
     @Test
-    public void testAddShop() throws FileNotFoundException {
+    @Ignore
+    public void testAddShop() throws ShopOperationException, FileNotFoundException {
         Shop shop = new Shop();
         Area area = new Area();
         PersonInfo owner = new PersonInfo();
@@ -55,5 +58,16 @@ public class ShopServiceTest extends BaseTest {
         InputStream is = new FileInputStream(shopImg);
         ShopExecution se = shopService.addShop(shop, is, shopImg.getName());
         Assert.assertEquals(se.getState(), ShopStateEnum.CHECK.getState());
+    }
+
+    @Test
+    public void testModifyShop() throws ShopOperationException, FileNotFoundException {
+        Shop shop = new Shop();
+        shop.setShopId(1L);
+        shop.setShopName("修改后的店铺名称");
+        File shopImg = new File("/java/images/dabai.jpeg");
+        InputStream is = new FileInputStream(shopImg);
+        ShopExecution se = shopService.modifyShop(shop, is, "dabai.jpeg");
+        System.out.println("新的图片地址：" + se.getShop().getShopImg());
     }
 }

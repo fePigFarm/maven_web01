@@ -92,18 +92,29 @@ public class ShopServiceImpl implements ShopService {
             return new ShopExecution(ShopStateEnum.NULL_SHOP);
         } else {
             // 1、判断是否要处理图片
-            if(shopImgInputStream != null && fileName != null && !"".equals(fileName)) {
-                // 放在内存中的临时对象
-                Shop tempShop = shopDao.queryByShopId(shop.getShopId());
-                if(tempShop.getShopImg() != null) {
-                    ImageUtil.deleteFileOrPath(tempShop.getShopImg());
+            try {
+                if(shopImgInputStream != null && fileName != null && !"".equals(fileName)) {
+                    // 把这个shopId的shop关联的图片删除
+                    Shop tempShop = shopDao.queryByShopId(shop.getShopId());
+                    if(tempShop.getShopImg() != null) {
+                        ImageUtil.deleteFileOrPath(tempShop.getShopImg());
+                    }
+                    // 生成新的图片
+                    addShopImg(shop, shopImgInputStream, fileName);
                 }
-                // 生成新的图片
-                addShopImg(shop, shopImgInputStream, fileName);
+                // 2、更新店铺信息
+                shop.setLastEditTime(new Date());
+                int effectedNum = shopDao.updateShop(shop);
+                if(effectedNum <= 0) {
+                    return new ShopExecution(ShopStateEnum.INNER_ERROR);
+                } else {
+                    shop = shopDao.queryByShopId(shop.getShopId());
+                    return new ShopExecution(ShopStateEnum.SUCCESS, shop);
+                }
+            } catch (Exception e) {
+                throw new ShopOperationException("修改店铺信息出错：" + e.getMessage());
             }
-            // 2、更新店铺信息
         }
-        return null;
     }
 
     // 给shop添加图片的方法
