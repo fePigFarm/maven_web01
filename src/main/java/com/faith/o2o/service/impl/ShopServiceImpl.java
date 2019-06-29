@@ -87,8 +87,22 @@ public class ShopServiceImpl implements ShopService {
      */
     @Override
     public ShopExecution modifyShop(Shop shop, InputStream shopImgInputStream, String fileName) throws ShopOperationException {
-        // 1、判断是否要处理图片
-        // 2、更新店铺信息
+
+        if (shop == null || shop.getShopId() == null) {
+            return new ShopExecution(ShopStateEnum.NULL_SHOP);
+        } else {
+            // 1、判断是否要处理图片
+            if(shopImgInputStream != null && fileName != null && !"".equals(fileName)) {
+                // 放在内存中的临时对象
+                Shop tempShop = shopDao.queryByShopId(shop.getShopId());
+                if(tempShop.getShopImg() != null) {
+                    ImageUtil.deleteFileOrPath(tempShop.getShopImg());
+                }
+                // 生成新的图片
+                addShopImg(shop, shopImgInputStream, fileName);
+            }
+            // 2、更新店铺信息
+        }
         return null;
     }
 

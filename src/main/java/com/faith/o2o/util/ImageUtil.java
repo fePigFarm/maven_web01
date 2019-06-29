@@ -77,6 +77,25 @@ public class ImageUtil {
         return nowTimeStr + rannum;
     }
 
+    /**
+     * 判斷storePath是文件路徑還是目錄路徑
+     * 如果是文件路径删除该文件
+     * 如果是目录路径则删除该目录下的所有文件
+     * @param storePath
+     */
+    public static void deleteFileOrPath(String storePath) {
+        File fileOrPath = new File(PathUtil.getImgBasePath() + storePath);
+        if (fileOrPath.exists()) {
+            if (fileOrPath.isDirectory()) {
+                File[] files = fileOrPath.listFiles();
+                for (int i = 0; i < files.length; i++) {
+                    files[i].delete();
+                }
+            }
+            fileOrPath.delete();
+        }
+    }
+
     public static void main(String[] args) throws IOException {
 
 //        Thumbnails.of(new File("/java/images/javalearn.jpg"))
