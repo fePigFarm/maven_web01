@@ -124,9 +124,10 @@ public class ShopManagementController {
 
         if (shop != null && shopImg != null) {
             // 通过session拿到登录的用户
-            PersonInfo owner = (PersonInfo) request.getSession().getAttribute("user");
 //            PersonInfo owner = new PersonInfo();
 //            owner.setUserId(1L);
+//            shop.setOwner(owner);
+            PersonInfo owner = (PersonInfo) request.getSession().getAttribute("user");
             shop.setOwner(owner);
 
             /*
@@ -156,6 +157,7 @@ public class ShopManagementController {
                 if (se.getState() == ShopStateEnum.CHECK.getState()) {
                     modelMap.put("sucess", true);
                     // 该用户可以操作的店铺列表，放到session中
+                    @SuppressWarnings("unchecked")
                     List<Shop> shopList = (List<Shop>) request.getSession().getAttribute("shopList");
                     if(shopList == null || shopList.size() == 0) {
                         shopList = new ArrayList<Shop>();
@@ -213,7 +215,6 @@ public class ShopManagementController {
 
         if (shop != null && shop.getShopId() != null) {
             PersonInfo owner = (PersonInfo) request.getSession().getAttribute("user");
-            // owner.setUserId(1L);
             shop.setOwner(owner);
             ShopExecution se;
             try {
