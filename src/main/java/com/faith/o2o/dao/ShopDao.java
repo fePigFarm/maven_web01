@@ -1,6 +1,9 @@
 package com.faith.o2o.dao;
 
 import com.faith.o2o.entity.Shop;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Auther: yangguoqiang01
@@ -9,6 +12,16 @@ import com.faith.o2o.entity.Shop;
  * @version: 1.0
  */
 public interface ShopDao {
+    /**
+     * 功能描述: 分页查询店铺 条件：店铺名（模糊） 店铺状态 店铺类别，区域Id， owner
+     * @param:
+     * @return:
+     * @auther:
+     * @date:
+     */
+    List<Shop> queryShopList(@Param("shopCondition") Shop shopCondition, @Param("rowIndex") int rowIndex,
+                             @Param("pageSize") int PageSize);
+
     /**
      * 根据id获取店铺信息
      * @param shopId
