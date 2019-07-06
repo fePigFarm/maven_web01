@@ -63,6 +63,10 @@
 		  	s.shop_id=#{shopId}
 	</select>
 
+	<select id="queryShopList" resultMap="shopMap">
+
+	</select>
+
     <!--insert 前面是数据库的列名 values后面是实体类的变量-->
     <insert id="insertShop"
             useGeneratedKeys="true"
