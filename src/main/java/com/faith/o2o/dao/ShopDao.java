@@ -15,6 +15,9 @@ public interface ShopDao {
     /**
      * 功能描述: 分页查询店铺 条件：店铺名（模糊） 店铺状态 店铺类别，区域Id， owner
      * @param:
+     *      shopCondition 查询条件
+     *      rowIndex 起始页码
+     *      pageSize 每页条数
      * @return:
      * @auther:
      * @date:
